@@ -1,5 +1,11 @@
+import LoginComponent from "components/login/LoginComponent";
+
 const LoginPage = () => {
-	return <div>gwaegwaegwef</div>;
+	return (
+		<>
+			<LoginComponent />
+		</>
+	);
 };
 
 export default LoginPage;
