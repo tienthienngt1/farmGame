@@ -1,6 +1,14 @@
 import styled from "styled-components";
-import logo from "assets/logo.png";
+import logo from "src/assets/logo.png";
 import { Button } from "@mui/material";
+import { Facebook, Google } from "react-bootstrap-icons";
+import {
+	useSignInWithFacebook,
+	useSignInWithGoogle,
+} from "react-firebase-hooks/auth";
+import { auth } from "src/firebase/config";
+import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 type Props = {};
 
@@ -39,6 +47,12 @@ const TextStyle = styled.div`
 `;
 
 const LoginComponent = (props: Props) => {
+	const navigate = useNavigate();
+	const [signInWithGoogle, user] = useSignInWithGoogle(auth);
+	const [signInWithFacebook, userF] = useSignInWithFacebook(auth);
+	useEffect(() => {
+		if (user || userF) navigate("/");
+	}, [user, userF, navigate]);
 	return (
 		<Container>
 			<ImageStyle>
@@ -48,8 +62,20 @@ const LoginComponent = (props: Props) => {
 				<p>Login with</p>
 			</TextStyle>
 			<ButtonStyle>
-				<Button variant="outlined">Login With Google</Button>
-				<Button variant="outlined">Login With Facebook</Button>
+				<Button
+					variant="outlined"
+					startIcon={<Google />}
+					onClick={() => signInWithGoogle()}
+				>
+					Google
+				</Button>
+				<Button
+					variant="outlined"
+					startIcon={<Facebook />}
+					onClick={() => signInWithFacebook()}
+				>
+					Facebook
+				</Button>
 			</ButtonStyle>
 		</Container>
 	);
