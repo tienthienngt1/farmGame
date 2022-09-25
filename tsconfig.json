@@ -15,15 +15,7 @@
 		"isolatedModules": true,
 		"noEmit": true,
 		"jsx": "react-jsx",
-		"baseUrl": ".",
-		"paths": {
-			"@pages/*": ["src/pages/*"],
-			"@components/*": ["src/components/*"],
-			"@firebase/*": ["src/firebase/*"],
-			"@routes/*": ["src/routes/*"],
-			"@assets/*": ["src/assets/*"],
-			"@api/*": ["src/api/*"]
-		}
+		"baseUrl": "."
 	},
 	"include": ["src"]
 }

@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import logo from "src/assets/logo.png";
-import { Button } from "@mui/material";
 import { Facebook, Google } from "react-bootstrap-icons";
 import {
 	useSignInWithFacebook,
@@ -9,6 +8,7 @@ import {
 import { auth } from "src/firebase/config";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
+import Button from "src/components/common/Button";
 
 type Props = {};
 
@@ -36,6 +36,8 @@ const ButtonStyle = styled.div`
 		font-family: "Jua", sans-serif;
 		font-family: "Sriracha", cursive;
 		color: #000;
+		display: flex;
+		align-items: center;
 	}
 `;
 
@@ -63,19 +65,15 @@ const LoginComponent = (props: Props) => {
 			</TextStyle>
 			<ButtonStyle>
 				<Button
-					variant="outlined"
-					startIcon={<Google />}
+					text="Google"
+					icon={<Google />}
 					onClick={() => signInWithGoogle()}
-				>
-					Google
-				</Button>
+				/>
 				<Button
-					variant="outlined"
-					startIcon={<Facebook />}
+					text="Facebook"
+					icon={<Facebook />}
 					onClick={() => signInWithFacebook()}
-				>
-					Facebook
-				</Button>
+				/>
 			</ButtonStyle>
 		</Container>
 	);
