@@ -1,123 +1,91 @@
-import React from "react";
-import styled from "styled-components";
 import Button from "../common/Button";
-import backgroundTittle from "src/assets/background_tittle.jpg";
-
-const Container = styled.div`
-	width: 100%;
-	border: 1px solid black;
-	display: flex;
-	align-items: center;
-	flex-direction: column;
-	padding: 2rem 0;
-`;
-
-const CharacterNameStyle = styled.div`
-	padding: 0.5rem;
-	border: 2px solid #000;
-	border-radius: 10px;
-	input {
-		border: none;
-		padding: 4px;
-		border-radius: 3px;
-	}
-`;
-const CharacterMainStyle = styled.div`
-	border: 1px solid blue;
-	display: flex;
-	justify-content: center;
-	margin: 3rem 0;
-	& > div {
-		width: 300px;
-		text-align: center;
-		.character_tittle {
-			width: 100%;
-			font-size: 1.4rem;
-			background-image: url(${backgroundTittle});
-			display: inline-block;
-			padding: 5px;
-			color: #fff;
-			border-radius: 5px;
-		}
-	}
-	.hair_collection,
-	.skin_collection {
-		width: 10rem;
-		margin-top: 1rem;
-	}
-`;
-const CharacterHairStyle = styled.div`
-	height: 15rem;
-	border: 1px solid blue;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	.hair_collection {
-		display: grid;
-		height: 10rem;
-		grid-template-columns: 1fr 1fr;
-		grid-template-rows: 1fr 1fr;
-		gap: 2px;
-		&_item {
-			border-radius: 5px;
-
-			background-color: blue;
-		}
-	}
-`;
-const CharacterStyle = styled.div`
-	border: 1px solid blue;
-`;
-const CharacterSkinColorStyle = styled.div`
-	display: flex;
-	align-items: center;
-	flex-direction: column;
-	border: 1px solid blue;
-	.skin_collection {
-		aspect-ratio: 4;
-		display: grid;
-
-		grid-template-columns: repeat(4, 1fr);
-		gap: 2px;
-		&_item {
-			background-color: black;
-			border-radius: 5px;
-		}
-	}
-`;
-
+import ReactNiceAvatar from "react-nice-avatar";
+import {
+	characterConfig,
+	characterStyleList,
+} from "../../config/characterConfig";
+import {
+	CreateNewCharacterContainer,
+	CharacterColorStyle,
+	CharacterMainStyle,
+	CharacterNameStyle,
+	CharacterStyle,
+} from "src/styled/CreateNewCharacterStyled";
+import { useState } from "react";
 type Props = {};
-
 const CreateNewCharacter = (props: Props) => {
+	const [config, setConfig] = useState<any>(characterConfig);
+	console.log(config);
 	return (
-		<Container>
+		<CreateNewCharacterContainer>
 			<CharacterNameStyle>
 				<input type="text" placeholder="Please enter your name" />
 			</CharacterNameStyle>
+			<ReactNiceAvatar
+				{...config}
+				className="avatar"
+				shape="circle"
+				style={{
+					width: "10rem",
+					height: "10rem",
+				}}
+			/>
 			<CharacterMainStyle>
-				<CharacterHairStyle>
-					<div className="character_tittle">Hair Style</div>
-					<div className="hair_collection">
-						<div className="hair_collection_item"></div>
-						<div className="hair_collection_item"></div>
-						<div className="hair_collection_item"></div>
-						<div className="hair_collection_item"></div>
+				<CharacterStyle>
+					<div className="character_tittle">Style</div>
+					<div className="character_style_collection">
+						{characterStyleList.map((style) => (
+							<div
+								key={style.title}
+								className="character_styled_collection_item"
+							>
+								<div>{style.title}:</div>
+								<div>
+									{style.img.map((s) => (
+										<img
+											key={s.alt}
+											src={s.url}
+											alt={s.alt}
+											onClick={() =>
+												setConfig({
+													...config,
+													...s.config,
+												})
+											}
+										/>
+									))}
+								</div>
+							</div>
+						))}
 					</div>
-				</CharacterHairStyle>
-				<CharacterStyle></CharacterStyle>
-				<CharacterSkinColorStyle>
-					<div className="character_tittle">Skin Color</div>
-					<div className="skin_collection">
-						<div className="skin_collection_item"></div>
-						<div className="skin_collection_item"></div>
-						<div className="skin_collection_item"></div>
-						<div className="skin_collection_item"></div>
-					</div>
-				</CharacterSkinColorStyle>
+				</CharacterStyle>
+				<CharacterColorStyle>
+					<div className="character_tittle">Color</div>
+					<div className="character_color_collection"></div>
+				</CharacterColorStyle>
 			</CharacterMainStyle>
 			<Button text="Confirm" />
-		</Container>
+		</CreateNewCharacterContainer>
 	);
 };
 
 export default CreateNewCharacter;
+
+// note
+// woman = {
+//     "sex": "woman",
+//   "faceColor": "#F9C9B6",
+//   "earSize": "small",
+//   "eyeStyle": "oval",
+//   "noseStyle": "short",
+//   "mouthStyle": "peace",
+//   "shirtStyle": "hoody",
+//   "glassesStyle": "none",
+//   "hairColor": "#77311D",
+//   "hairStyle": "womanShort",
+//   "hatStyle": "none",
+//   "hatColor": "#506AF4",
+//   "eyeBrowStyle": "up",
+//   "shirtColor": "#6BD9E9",
+//   "bgColor": "linear-gradient(45deg, #176fff 0%, #68ffef 100%)"
+// }
