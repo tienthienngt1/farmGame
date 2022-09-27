@@ -2,7 +2,7 @@ import { genConfig } from "react-nice-avatar";
 //config character style
 export const characterConfig = genConfig({
 	sex: "woman",
-	faceColor: "#AC6651",
+	faceColor: "#F9C9B6",
 	earSize: "big",
 	eyeStyle: "circle",
 	noseStyle: "round",
@@ -41,11 +41,23 @@ export const characterStyleList = [
 	{
 		title: "Sex",
 		img: [
-			{ alt: "man", url: images["man"], config: { sex: "man" } },
+			{
+				alt: "man",
+				url: images["man"],
+				config: {
+					sex: "man",
+					eyeBrowStyle: "up",
+					hairStyle: "thick",
+				},
+			},
 			{
 				alt: "woman",
 				url: images["woman"],
-				config: { sex: "woman" },
+				config: {
+					sex: "woman",
+					eyeBrowStyle: "upWoman",
+					hairStyle: "womanLong",
+				},
 			},
 		],
 	},
@@ -213,5 +225,28 @@ export const characterStyleList = [
 				config: { shirtStyle: "short" },
 			},
 		],
+	},
+];
+
+export const characterColorList = [
+	{
+		title: "Face Color",
+		config: "faceColor",
+	},
+	{
+		title: "Hair Color",
+		config: "hairColor",
+	},
+	{
+		title: "Hat Color",
+		config: "hatColor",
+	},
+	{
+		title: "Shirt Color",
+		config: "shirtColor",
+	},
+	{
+		title: "Background Color",
+		config: "bgColor",
 	},
 ];

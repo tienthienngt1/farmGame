@@ -47,14 +47,35 @@ export const CharacterStyle = styled.div`
 	border: 1px solid blue;
 	padding: 2px;
 	font-size: 1.2rem;
-	.character_styled_collection_item {
-		display: flex;
-		justify-content: space-between;
-		img {
-			width: 2rem;
-			height: 2rem;
-			margin-left: 5px;
-			cursor: pointer;
+	.character_style_collection {
+		margin-top: 1rem;
+		&_item {
+			display: flex;
+			justify-content: space-between;
+			img {
+				width: 2rem;
+				height: 2rem;
+				margin-left: 5px;
+				cursor: pointer;
+			}
+			.item_color {
+				width: 1.3rem;
+				height: 1.3rem;
+				cursor: pointer;
+				border: 1px solid;
+			}
+		}
+		.color_picker {
+			border: 1px solid;
+			display: flex;
+			justify-content: center;
+			span {
+				width: 1.5rem;
+				height: 1.9rem;
+				cursor: pointer;
+				background-color: antiquewhite;
+				display: inline-block;
+			}
 		}
 	}
 `;

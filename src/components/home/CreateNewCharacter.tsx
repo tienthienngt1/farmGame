@@ -6,16 +6,20 @@ import {
 } from "../../config/characterConfig";
 import {
 	CreateNewCharacterContainer,
-	CharacterColorStyle,
 	CharacterMainStyle,
 	CharacterNameStyle,
 	CharacterStyle,
 } from "src/styled/CreateNewCharacterStyled";
 import { useState } from "react";
+import { characterColorList } from "../../config/characterConfig";
+import { ChromePicker } from "react-color";
+
 type Props = {};
 const CreateNewCharacter = (props: Props) => {
 	const [config, setConfig] = useState<any>(characterConfig);
-	console.log(config);
+	const [color, setColor] = useState<string>("");
+	const [isDisplayPicker, setDisplayPicker] = useState<boolean>(false);
+	const [colorConfig, setColorConfig] = useState<string>("");
 	return (
 		<CreateNewCharacterContainer>
 			<CharacterNameStyle>
@@ -28,6 +32,8 @@ const CreateNewCharacter = (props: Props) => {
 				style={{
 					width: "10rem",
 					height: "10rem",
+					position: "sticky",
+					top: "1rem",
 				}}
 			/>
 			<CharacterMainStyle>
@@ -37,7 +43,7 @@ const CreateNewCharacter = (props: Props) => {
 						{characterStyleList.map((style) => (
 							<div
 								key={style.title}
-								className="character_styled_collection_item"
+								className="character_style_collection_item"
 							>
 								<div>{style.title}:</div>
 								<div>
@@ -59,10 +65,55 @@ const CreateNewCharacter = (props: Props) => {
 						))}
 					</div>
 				</CharacterStyle>
-				<CharacterColorStyle>
+				<CharacterStyle>
 					<div className="character_tittle">Color</div>
-					<div className="character_color_collection"></div>
-				</CharacterColorStyle>
+					<div className="character_style_collection">
+						{characterColorList.map((style) => (
+							<div
+								key={style.title}
+								className="character_style_collection_item"
+							>
+								<div>{style.title}:</div>
+								<div
+									className="item_color"
+									style={{
+										backgroundColor: config[style.config],
+									}}
+									onClick={() => {
+										setColorConfig(style.config);
+										setDisplayPicker(true);
+										setColor(config[style.config]);
+									}}
+								></div>
+							</div>
+						))}
+						{isDisplayPicker ? (
+							<div className="color_picker">
+								<ChromePicker
+									color={color}
+									onChange={(color) => {
+										setColor(color.hex);
+										setConfig({
+											...config,
+											[colorConfig]: color.hex,
+										});
+									}}
+								/>
+								<span
+									onClick={() => {
+										setColor("");
+										setDisplayPicker(false);
+										setColorConfig("");
+									}}
+								>
+									X
+								</span>
+							</div>
+						) : (
+							""
+						)}
+					</div>
+				</CharacterStyle>
 			</CharacterMainStyle>
 			<Button text="Confirm" />
 		</CreateNewCharacterContainer>
