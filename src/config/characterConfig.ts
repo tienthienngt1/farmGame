@@ -1,7 +1,7 @@
 import { genConfig } from "react-nice-avatar";
 //config character style
 export const characterConfig = genConfig({
-	sex: "man",
+	sex: "woman",
 	faceColor: "#AC6651",
 	earSize: "big",
 	eyeStyle: "circle",
