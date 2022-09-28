@@ -1,3 +1,4 @@
+import { useState } from "react";
 import Button from "../common/Button";
 import ReactNiceAvatar from "react-nice-avatar";
 import {
@@ -10,20 +11,31 @@ import {
 	CharacterNameStyle,
 	CharacterStyle,
 } from "src/styled/CreateNewCharacterStyled";
-import { useState } from "react";
 import { characterColorList } from "../../config/characterConfig";
 import { ChromePicker } from "react-color";
+import { ArrowRepeat } from "react-bootstrap-icons";
+import names from "src/assets/names.json";
 
-type Props = {};
-const CreateNewCharacter = (props: Props) => {
+const CreateNewCharacter = () => {
 	const [config, setConfig] = useState<any>(characterConfig);
 	const [color, setColor] = useState<string>("");
 	const [isDisplayPicker, setDisplayPicker] = useState<boolean>(false);
 	const [colorConfig, setColorConfig] = useState<string>("");
+	const [name, setName] = useState<string>("");
 	return (
 		<CreateNewCharacterContainer>
 			<CharacterNameStyle>
-				<input type="text" placeholder="Please enter your name" />
+				<input
+					type="text"
+					placeholder="Please enter your name"
+					value={name}
+					onChange={(e) => setName(e.target.value)}
+				/>
+				<ArrowRepeat
+					onClick={() =>
+						setName(names[Math.floor(Math.random() * names.length)])
+					}
+				/>
 			</CharacterNameStyle>
 			<ReactNiceAvatar
 				{...config}
@@ -121,22 +133,3 @@ const CreateNewCharacter = (props: Props) => {
 };
 
 export default CreateNewCharacter;
-
-// note
-// woman = {
-//     "sex": "woman",
-//   "faceColor": "#F9C9B6",
-//   "earSize": "small",
-//   "eyeStyle": "oval",
-//   "noseStyle": "short",
-//   "mouthStyle": "peace",
-//   "shirtStyle": "hoody",
-//   "glassesStyle": "none",
-//   "hairColor": "#77311D",
-//   "hairStyle": "womanShort",
-//   "hatStyle": "none",
-//   "hatColor": "#506AF4",
-//   "eyeBrowStyle": "up",
-//   "shirtColor": "#6BD9E9",
-//   "bgColor": "linear-gradient(45deg, #176fff 0%, #68ffef 100%)"
-// }

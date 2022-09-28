@@ -16,10 +16,17 @@ export const CharacterNameStyle = styled.div`
 	border: 2px solid #000;
 	border-radius: 10px;
 	margin-bottom: 2rem;
+	position: relative;
 	input {
 		border: none;
 		padding: 4px;
 		border-radius: 3px;
+	}
+	svg {
+		position: absolute;
+		top: 30%;
+		right: 5%;
+		font-size: 1.2rem;
 	}
 `;
 export const CharacterMainStyle = styled.div`

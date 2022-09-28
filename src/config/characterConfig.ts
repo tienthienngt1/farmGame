@@ -9,7 +9,7 @@ export const characterConfig = genConfig({
 	mouthStyle: "peace",
 	shirtStyle: "hoody",
 	glassesStyle: "none",
-	hairColor: "#000",
+	hairColor: "#fff",
 	hairStyle: "thick",
 	hatStyle: "none",
 	hatColor: "#506AF4",
