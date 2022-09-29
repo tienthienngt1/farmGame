@@ -4,14 +4,17 @@ import { db } from "src/firebase/config";
 import { collection, query, where } from "firebase/firestore";
 import Dashboard from "src/components/home/home/Dashboard";
 import { UserProps } from "src/types/user";
+import Loading from "src/components/common/Loading";
 
 const HomePage = (props: UserProps) => {
-	const isExistUser = useCollectionData(
+	const [value, loading] = useCollectionData(
 		query(collection(db, "user"), where("email", "==", props.email))
 	);
 	return (
 		<>
-			{isExistUser[0]?.[0] ? (
+			{loading ? (
+				<Loading />
+			) : value?.[0] ? (
 				<Dashboard {...props} />
 			) : (
 				<CreateNewCharacter {...props} />
