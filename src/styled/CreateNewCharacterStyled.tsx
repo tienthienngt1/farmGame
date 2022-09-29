@@ -4,7 +4,6 @@ import backgroundTittle from "src/assets/background_tittle.jpg";
 // Style components
 export const CreateNewCharacterContainer = styled.div`
 	width: 100%;
-	border: 1px solid black;
 	display: flex;
 	align-items: center;
 	flex-direction: column;
@@ -13,10 +12,13 @@ export const CreateNewCharacterContainer = styled.div`
 
 export const CharacterNameStyle = styled.div`
 	padding: 0.5rem;
-	border: 2px solid #000;
 	border-radius: 10px;
-	margin-bottom: 2rem;
 	position: relative;
+	div:first-child {
+		background-color: #fff;
+		width: 115%;
+		border: 1px solid;
+	}
 	input {
 		border: none;
 		padding: 4px;
@@ -25,12 +27,15 @@ export const CharacterNameStyle = styled.div`
 	svg {
 		position: absolute;
 		top: 30%;
-		right: 5%;
+		right: -7%;
 		font-size: 1.2rem;
+	}
+	.character_name_status {
+		font-size: 1rem;
+		color: red;
 	}
 `;
 export const CharacterMainStyle = styled.div`
-	border: 1px solid blue;
 	display: flex;
 	justify-content: center;
 	margin-top: 2rem;
@@ -51,7 +56,6 @@ export const CharacterMainStyle = styled.div`
 	}
 `;
 export const CharacterStyle = styled.div`
-	border: 1px solid blue;
 	padding: 2px;
 	font-size: 1.2rem;
 	.character_style_collection {
@@ -69,11 +73,9 @@ export const CharacterStyle = styled.div`
 				width: 1.3rem;
 				height: 1.3rem;
 				cursor: pointer;
-				border: 1px solid;
 			}
 		}
 		.color_picker {
-			border: 1px solid;
 			display: flex;
 			justify-content: center;
 			span {
@@ -91,6 +93,5 @@ export const CharacterColorStyle = styled.div`
 	display: flex;
 	align-items: center;
 	flex-direction: column;
-	border: 1px solid blue;
 `;
 // End Style Components

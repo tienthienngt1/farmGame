@@ -51,3 +51,7 @@ code {
 	font-family: "Jua", sans-serif;
 	font-family: "Sriracha", cursive;
 }
+
+input.error_validate {
+	color: red;
+}

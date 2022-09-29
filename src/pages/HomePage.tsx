@@ -1,17 +1,22 @@
-import { auth } from "src/firebase/config";
-import { signOut } from "firebase/auth";
-import { useAuthState } from "react-firebase-hooks/auth";
-import Button from "src/components/common/Button";
-import CreateNewCharacter from "src/components/home/CreateNewCharacter";
+import CreateNewCharacter from "src/components/home/character/CreateNewCharacter";
+import { useCollectionData } from "react-firebase-hooks/firestore";
+import { db } from "src/firebase/config";
+import { collection, query, where } from "firebase/firestore";
+import Dashboard from "src/components/home/home/Dashboard";
+import { UserProps } from "src/types/user";
 
-const HomePage = () => {
-	const [user] = useAuthState(auth);
+const HomePage = (props: UserProps) => {
+	const isExistUser = useCollectionData(
+		query(collection(db, "user"), where("email", "==", props.email))
+	);
 	return (
-		<div>
-			<CreateNewCharacter />
-			<Button text="Logout" onClick={() => signOut(auth)} />
-			<p>{user?.displayName}</p>
-		</div>
+		<>
+			{isExistUser[0]?.[0] ? (
+				<Dashboard {...props} />
+			) : (
+				<CreateNewCharacter {...props} />
+			)}
+		</>
 	);
 };
 
